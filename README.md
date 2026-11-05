@@ -4,6 +4,19 @@ A Shopify theme for an independent bookstore, built on [Dawn](https://github.com
 
 This is a test and portfolio project. It isn't running on a live store.
 
+![The book hero: cover tips forward off the shelf, then the title, author, formats and button rise in](docs/hero-tip-in.gif)
+
+<table>
+  <tr>
+    <td width="70%"><img src="docs/hero-desktop.png" alt="Book hero on desktop: cover on the left, title, author, blurb, formats with prices and a Choose a format button on the right"></td>
+    <td width="30%"><img src="docs/hero-mobile.png" alt="Book hero on a phone: cover above the text, with the Hardcover and Paperback formats stacked as rows"></td>
+  </tr>
+  <tr>
+    <td align="center">Desktop</td>
+    <td align="center">Phone (formats stack below 750px)</td>
+  </tr>
+</table>
+
 ## What's custom
 
 **Book hero section** (`sections/hero-book.liquid`)
