@@ -6,8 +6,8 @@
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
+            "text": "by {{ product.vendor }}",
+            "text_style": "subtitle"
           }
         },
         "title": {
@@ -26,10 +26,19 @@
         "quantity_selector": {
           "type": "quantity_selector"
         },
+        "signed_copy": {
+          "type": "signed_copy",
+          "settings": {
+            "label": "Signed copy",
+            "note": "Signed by the author before shipping",
+            "only_for": "Hardcover",
+            "note_unavailable": "Only hardcovers can be signed"
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
         },
@@ -44,11 +53,12 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
+        "vendor",
         "price",
         "variant_picker",
         "quantity_selector",
+        "signed_copy",
         "buy_buttons",
         "description",
         "share"

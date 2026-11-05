@@ -1,0 +1,233 @@
+.hero-book__grid {
+  display: grid;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-book__cover {
+  justify-self: center;
+  width: min(100%, 34rem);
+}
+
+.hero-book__cover-link {
+  display: block;
+}
+
+/* Cover reads as a physical hardback: hinge shading on the left, cast shadow below. */
+.hero-book__cover-image,
+.hero-book__cover-placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 0.2rem 0.4rem 0.4rem 0.2rem;
+  box-shadow:
+    0 0.2rem 0.4rem rgba(29, 35, 64, 0.18),
+    0 2.4rem 4.8rem -1.2rem rgba(29, 35, 64, 0.45);
+}
+
+.hero-book__cover-link,
+.hero-book__cover-placeholder {
+  position: relative;
+}
+
+.hero-book__cover-link::after,
+.hero-book__cover-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.28) 0,
+    rgba(255, 255, 255, 0.12) 1.1%,
+    rgba(0, 0, 0, 0.1) 2.6%,
+    transparent 5%
+  );
+}
+
+.hero-book__cover-placeholder {
+  overflow: hidden;
+  background-color: rgba(var(--color-foreground), 0.06);
+}
+
+.hero-book__cover-placeholder .placeholder-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-book__content {
+  max-width: 56rem;
+}
+
+.hero-book__eyebrow {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.8rem;
+  color: rgba(var(--color-foreground), 0.72);
+}
+
+.hero-book__title {
+  margin: 0;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.hero-book__author {
+  margin: 1.4rem 0 0;
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 2.2rem;
+}
+
+.hero-book__blurb {
+  margin-top: 2.8rem;
+  max-width: 46rem;
+  font-size: 1.7rem;
+  line-height: 1.6;
+}
+
+.hero-book__blurb p {
+  margin: 0;
+}
+
+.hero-book__formats {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin: 3.2rem 0 0;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.2);
+  max-width: 46rem;
+}
+
+.hero-book__format {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1.6rem;
+  padding: 1.2rem 0;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+}
+
+.hero-book__format + .hero-book__format {
+  padding-left: 2.4rem;
+  border-left: 0.1rem solid rgba(var(--color-foreground), 0.2);
+}
+
+.hero-book__format dt {
+  font-size: 1.5rem;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+.hero-book__format dd {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+}
+
+.hero-book__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem 2.4rem;
+  margin-top: 3.2rem;
+}
+
+.hero-book__note {
+  margin: 0;
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.72);
+  max-width: 24rem;
+}
+
+/* Phones: stack formats as rows so three or more variants don't squash together. */
+@media screen and (max-width: 749px) {
+  .hero-book__cover {
+    width: min(72%, 28rem);
+  }
+
+  .hero-book__formats {
+    flex-direction: column;
+  }
+
+  .hero-book__format + .hero-book__format {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .hero-book__grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 7.2rem;
+  }
+
+  .hero-book__grid--image-right .hero-book__cover {
+    order: 2;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hero-book__grid {
+    gap: 10rem;
+  }
+}
+
+/*
+  Entrance animation. Only present when the theme setting "Reveal sections on
+  scroll" is on (.hero-book--animate) and the visitor allows motion.
+  - First section on the page: plays on load, CSS only, so the cover (the LCP
+    image) paints immediately. Opacity starts at 0.01, not 0, so the browser
+    still counts it as painted.
+  - Lower on the page: elements carry Dawn's .scroll-trigger; animations.js adds
+    .scroll-trigger--offscreen until they scroll into view.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .hero-book--animate [data-reveal]:not(.scroll-trigger--offscreen) {
+    animation: heroBookRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms) both;
+  }
+
+  /* The book tips forward off the shelf: a turn on its spine, then settles. */
+  .hero-book--animate [data-reveal='cover']:not(.scroll-trigger--offscreen) {
+    transform-origin: left center;
+    animation-name: heroBookTip;
+    animation-duration: 1.4s;
+  }
+
+  .hero-book--animate [data-reveal].scroll-trigger--offscreen {
+    opacity: 0.01;
+  }
+
+  .hero-book--animate [data-reveal].scroll-trigger--design-mode {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes heroBookRise {
+  from {
+    opacity: 0.01;
+    transform: translate3d(0, 2.4rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes heroBookTip {
+  from {
+    opacity: 0.01;
+    transform: perspective(120rem) translate3d(-3rem, 1.6rem, 0) rotateY(24deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

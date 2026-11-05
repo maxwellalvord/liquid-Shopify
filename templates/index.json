@@ -1,75 +1,95 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero_book": {
+      "type": "hero-book",
+      "settings": {
+        "product": "the-signal-at-gull-rock",
+        "eyebrow": "New this season",
+        "title": "",
+        "heading_size": "h0",
+        "author": "",
+        "blurb": "<p>On a storm-bound island, a relief keeper finds a logbook that records ships that haven’t sailed yet.</p>",
+        "show_formats": true,
+        "button_label": "Choose a format",
+        "button_link": "",
+        "note": "Hardcovers can be signed by the author.",
+        "image_position": "left",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
+    },
+    "the_list": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Four books this season",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-2",
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": true,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "padding_top": 64,
+        "padding_bottom": 72
+      }
+    },
+    "press_note": {
+      "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "A small press with a short list",
+            "heading_size": "h1"
           }
         },
-        "button": {
-          "type": "buttons",
+        "text": {
+          "type": "text",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "<p>Quillmere Press publishes four books a year and keeps every one in print. Hardcovers are sewn rather than glued, so they open flat and last, and each author signs first-printing copies by hand.</p>"
           }
         }
       },
       "block_order": [
         "heading",
-        "button"
+        "text"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
+        "desktop_content_position": "center",
+        "content_alignment": "left",
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero_book",
+    "the_list",
+    "press_note"
   ]
 }

@@ -491,6 +491,13 @@
                     block: block,
                     product_form_id: product_form_id
                   %}
+                {%- when 'signed_copy' -%}
+                  {%- render 'signed-copy-option',
+                    block: block,
+                    product: product,
+                    product_form_id: product_form_id,
+                    section_id: section.id
+                  -%}
                 {%- when 'buy_buttons' -%}
                   {%- render 'buy-buttons',
                     block: block,
@@ -877,6 +884,39 @@
       "type": "quantity_selector",
       "name": "t:sections.main-product.blocks.quantity_selector.name",
       "limit": 1
+    },
+    {
+      "type": "signed_copy",
+      "name": "Signed copy",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Checkbox label",
+          "default": "Signed copy",
+          "info": "Also used as the name shown on the cart and order."
+        },
+        {
+          "type": "text",
+          "id": "only_for",
+          "label": "Only allow for option value",
+          "default": "Hardcover",
+          "info": "Signing is only offered when the selected variant has this option value. Leave empty to allow it for every variant."
+        },
+        {
+          "type": "text",
+          "id": "note",
+          "label": "Note",
+          "default": "Signed by the author before shipping"
+        },
+        {
+          "type": "text",
+          "id": "note_unavailable",
+          "label": "Note when not available",
+          "default": "Only hardcovers can be signed"
+        }
+      ]
     },
     {
       "type": "variant_picker",

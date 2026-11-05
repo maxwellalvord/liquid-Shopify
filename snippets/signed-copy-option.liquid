@@ -1,0 +1,82 @@
+{% comment %}
+  Renders a "signed copy" checkbox tied to the product form.
+  When checked, it adds the line item property "<label>: Yes"
+  which shows in the cart, at checkout and on the order in admin.
+
+  Signing can be limited to variants with a given option value
+  (block setting "only_for", e.g. "Hardcover"). For other variants
+  the checkbox is unticked, disabled, and the note explains why.
+
+  Accepts:
+  - block: {Object} The signed_copy block
+  - product: {Object} The product being displayed
+  - product_form_id: {String} id of the product <form> to attach to
+  - section_id: {String} id of the section (for variant-change events)
+
+  Usage:
+  {% render 'signed-copy-option', block: block, product: product, product_form_id: product_form_id, section_id: section.id %}
+{% endcomment %}
+
+{{ 'component-signed-copy.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'signed-copy.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign label = block.settings.label | default: 'Signed copy'
+  # Compared case-insensitively: "hardcover" in the editor matches "Hardcover".
+  assign only_for = block.settings.only_for | strip | downcase
+  assign input_id = 'SignedCopy-' | append: block.id
+  assign current = product.selected_or_first_available_variant
+
+  assign signable_ids = ''
+  assign available = true
+  if only_for != blank
+    assign available = false
+    for variant in product.variants
+      for option_value in variant.options
+        assign option_key = option_value | strip | downcase
+        if option_key == only_for
+          assign signable_ids = signable_ids | append: variant.id | append: ','
+          if variant.id == current.id
+            assign available = true
+          endif
+          break
+        endif
+      endfor
+    endfor
+  endif
+
+  assign note_on = block.settings.note
+  assign note_off = block.settings.note_unavailable
+-%}
+
+<signed-copy
+  class="signed-copy{% unless available %} signed-copy--unavailable{% endunless %}"
+  data-section="{{ section_id }}"
+  {% if only_for != blank %}
+    data-signable="{{ signable_ids }}"
+  {% endif %}
+  data-note-on="{{ note_on | escape }}"
+  data-note-off="{{ note_off | escape }}"
+  {{ block.shopify_attributes }}
+>
+  <label class="signed-copy__label" for="{{ input_id }}">
+    <input
+      type="checkbox"
+      id="{{ input_id }}"
+      class="signed-copy__input"
+      name="properties[{{ label | escape }}]"
+      value="Yes"
+      form="{{ product_form_id }}"
+      {% unless available %}
+        disabled
+      {% endunless %}
+    >
+    <span class="signed-copy__box" aria-hidden="true"></span>
+    <span class="signed-copy__text">
+      <span class="signed-copy__title">{{ label | escape }}</span>
+      <span class="signed-copy__note" aria-live="polite">
+        {%- if available -%}{{ note_on | escape }}{%- else -%}{{ note_off | escape }}{%- endif -%}
+      </span>
+    </span>
+  </label>
+</signed-copy>

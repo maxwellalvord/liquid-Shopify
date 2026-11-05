@@ -1,0 +1,92 @@
+.signed-copy {
+  display: block;
+  margin: 1.6rem 0;
+}
+
+.signed-copy--unavailable .signed-copy__label {
+  cursor: not-allowed;
+  border-style: dashed;
+}
+
+.signed-copy--unavailable .signed-copy__label:hover {
+  border-color: rgba(var(--color-foreground), 0.25);
+}
+
+.signed-copy--unavailable .signed-copy__box,
+.signed-copy--unavailable .signed-copy__title {
+  opacity: 0.45;
+}
+
+.signed-copy__label {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.25);
+  border-radius: var(--inputs-radius, 0.4rem);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.signed-copy__label:hover {
+  border-color: rgba(var(--color-foreground), 0.6);
+}
+
+.signed-copy__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.signed-copy__box {
+  flex: 0 0 2rem;
+  height: 2rem;
+  margin-top: 0.2rem;
+  border: 0.15rem solid rgba(var(--color-foreground), 0.75);
+  border-radius: 0.3rem;
+  position: relative;
+}
+
+.signed-copy__input:checked + .signed-copy__box {
+  background-color: rgb(var(--color-foreground));
+  border-color: rgb(var(--color-foreground));
+}
+
+.signed-copy__input:checked + .signed-copy__box::after {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  top: 0.2rem;
+  width: 0.5rem;
+  height: 1rem;
+  border: solid rgb(var(--color-background));
+  border-width: 0 0.2rem 0.2rem 0;
+  transform: rotate(45deg);
+}
+
+.signed-copy__input:focus-visible + .signed-copy__box {
+  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline-offset: 0.3rem;
+}
+
+.signed-copy__label:has(.signed-copy__input:checked) {
+  border-color: rgb(var(--color-foreground));
+  background-color: rgba(var(--color-foreground), 0.04);
+}
+
+.signed-copy__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.signed-copy__title {
+  font-size: 1.5rem;
+  letter-spacing: 0.04rem;
+}
+
+.signed-copy__note {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.7);
+}

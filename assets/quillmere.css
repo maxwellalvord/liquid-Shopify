@@ -1,0 +1,85 @@
+/*
+  Quillmere Press (placeholder brand): theme-wide refinements layered over Dawn's base.css.
+  Placeholder brand. Palette and type live in config/settings_data.json.
+*/
+
+/* ---------- Type ---------- */
+
+h0, .h0, h1, .h1, h2, .h2 {
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.rte p,
+.product__description p {
+  max-width: 64ch;
+}
+
+/* Author names: italic serif, never tracked-out capitals. */
+.card-information .caption-with-letter-spacing,
+.product__text.subtitle {
+  font-family: var(--font-heading-family);
+  font-style: italic;
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.product__text.subtitle {
+  margin-top: -0.4rem;
+  font-size: 2rem;
+}
+
+/* ---------- Covers as objects ---------- */
+
+/* Product cards: drop the grey media well; let the cover cast its own shadow. */
+.card-wrapper .card__media .media,
+.card-wrapper .card__inner {
+  background: transparent;
+}
+
+.card-wrapper .card__media .media {
+  overflow: visible;
+}
+
+.card-wrapper .card__media img {
+  border-radius: 0.15rem 0.3rem 0.3rem 0.15rem;
+  box-shadow:
+    0 0.1rem 0.2rem rgba(29, 35, 64, 0.16),
+    0 1.4rem 2.4rem -1rem rgba(29, 35, 64, 0.4);
+}
+
+.card__heading {
+  font-size: 1.9rem;
+  line-height: 1.2;
+}
+
+.card-information > .price {
+  margin-top: 0.4rem;
+  font-size: 1.5rem;
+}
+
+/* ---------- Sections ---------- */
+
+/* The press note band: keep the measure readable on wide screens. */
+.rich-text__blocks {
+  max-width: 64rem;
+}
+
+.rich-text__text p {
+  font-size: 1.8rem;
+  line-height: 1.65;
+}
+
+/* Variant pills read as format tabs. */
+.product-form__input--pill input[type='radio'] + label {
+  padding: 1rem 2.2rem;
+  font-size: 1.5rem;
+}
+
+/* ---------- Focus ---------- */
+
+:focus-visible {
+  outline-color: rgba(var(--color-foreground), 0.75);
+}
